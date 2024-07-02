@@ -81,8 +81,8 @@ export const CardImage = ({
   className,
 }) => {
   return (
-    <div className={cn("rounded-2xl overflow-hidden", className)}>
-       <Image src={src} alt="photo Monument" />
+    <div className={cn("rounded-2xl overflow-hidden h-48", className)}>
+       <Image src={src} alt="photo Monument"  />
     </div>
   );
 };

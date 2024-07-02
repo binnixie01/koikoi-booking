@@ -9,27 +9,60 @@ import Image from "next/image";
 import logo from "@/public/logo1.svg";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const Header = () => {
   const { status, data } = useSession();
 
   return (
-    <header className="flex w-full h-12 bg-neutral-800/30 pt-4 pr-4 pl-2 pb-4 fixed z-50 backdrop-blur-lg  ">
-      <div className="flex wrapper w-full items-center justify-between  text-white/80">
+    <header className="flex w-full h-12 bg-neutral-800/30 pt-4 pr-4 pl-2 pb-4 fixed z-50 backdrop-blur-lg items-center">
+      <div className="md:hidden"><DropdownMenu >
+        <DropdownMenuTrigger asChild><Button variant="outline">Menu</Button></DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>Menu</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="" asChild>Home</DropdownMenuItem>
+          <DropdownMenuItem asChild><Link href={"/explore"}>Explore</Link></DropdownMenuItem>
+          <DropdownMenuItem asChild><Link href={"/about"}>About</Link></DropdownMenuItem>
+          {status === "authenticated" ? (<DropdownMenuItem className="" asChild><Link href={"/orders"}>Orders</Link></DropdownMenuItem>) : null}
+          {status === "authenticated" ? (<DropdownMenuItem className="" onClick={() => {
+            signOut();
+          }}>Sign-Out</DropdownMenuItem>) : <DropdownMenuItem asChild className=""><Link href={"/register"}>Sign-In</Link></DropdownMenuItem>}
+
+
+
+        </DropdownMenuContent>
+      </DropdownMenu></div>
+      {status==="authenticated"&&<div className="absolute md:hidden block right-4"><Avatar>
+        <AvatarImage src="" />
+        <AvatarFallback>{data?.user?.email.charAt(0)}</AvatarFallback>
+      </Avatar>
+      </div>}
+
+      <div className="md:flex wrapper w-full items-center justify-between  hidden text-white/80">
         <div className="flex justify-between items-center gap-8">
-        <Link href="/" className="w-32 h-10 bg-white rounded-3xl flex">
-          <div className="flex items-center gap-1">
-            <Image
-              src={logo}
-              alt="logo image"
-              width={60}
-              className="rounded-3xl"
-            />
-            <div className="relative text-black">KoiKoi</div>
-          </div>
-        </Link>
-        <Link className=" hover:text-white" href={"/explore"}>Explore</Link>
-        {status==="authenticated"?(<Link className=" hover:text-white" href={"/orders"}>Orders</Link>):<></>}
+          <Link href="/" className="w-32 h-10 bg-white rounded-3xl flex">
+            <div className="flex items-center gap-1">
+              <Image
+                src={logo}
+                alt="logo image"
+                width={60}
+                className="rounded-3xl"
+              />
+              <div className="relative text-black">KoiKoi</div>
+            </div>
+          </Link>
+          <Link className=" hover:text-white" href={"/explore"}>Explore</Link>
+          <Link className=" hover:text-white" href={"/about"}>About</Link>
+          {status === "authenticated" ? (<Link className=" hover:text-white" href={"/orders"}>Orders</Link>) : <></>}
         </div>
         <div className="flex w-72 justify-end gap-4 shadow-xl items-center">
           {status === "authenticated" ? (

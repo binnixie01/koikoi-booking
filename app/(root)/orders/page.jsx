@@ -3,6 +3,15 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 const Page = () => {
   const { data, status } = useSession()
@@ -14,7 +23,7 @@ const Page = () => {
     return tickets
   }
   useEffect(() => {
-    if (!data) { router.replace('/') } else {
+    if (status!="authenticated") { router.replace('/') } else {
       fetchTickets().then((ticket) => {
         setTickets(ticket)
       })
@@ -22,14 +31,30 @@ const Page = () => {
   }
     , [])
 
-  return (
-    <div className='flex flex-col  bg-black/90 pt-16 text-white/80 items-center h-screen text-sm md:text-base'>
-      <div className="flex flex-col md:flex-row gap-4 w-3/4 pb-4">
-        <div className='w-1/4'>Ticket ID</div> <div className='w-1/4'>Email</div><div className='w-1/4'>Place</div><div className='w-1/4'>No. of Tickets</div>
-      </div>
-      {tickets.map((ticket) => {
-        return <div className="flex flex-col md:flex-row gap-4 w-3/4 " key={ticket._id}><div className='w-1/4'>{ticket._id}</div> <div className='w-1/4'>{ticket.email}</div><div className='w-1/4'>{ticket.place}</div><div className='w-1/4'>{ticket.qty}</div></div>
-      })}</div>
+  return (<div className='pt-20 bg-black text-white/80 flex justify-center h-screen'>
+    <Table >
+      <TableCaption>A list of your recent ticket invoices.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="md:w-auto">Invoice</TableHead>
+          <TableHead>Place</TableHead>
+          <TableHead>No. of Tickets</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
+        </TableRow>
+      </TableHeader>
+
+      <TableBody>
+        {tickets.map((ticket) => {
+          return (
+            <TableRow key={ticket._id}>
+              <TableCell className="font-medium md:w-auto w-10">{ticket._id}</TableCell>
+              <TableCell>{ticket.place}</TableCell>
+              <TableCell>{ticket.qty}</TableCell>
+              <TableCell className="text-right">{ticket.qty * 50}</TableCell>
+            </TableRow>)
+        })}
+      </TableBody>
+    </Table></div>
   );
 };
 export default Page

@@ -24,14 +24,17 @@ import khongjom3 from "@/public/places/khongjom.jpg";
 import marjing3 from "@/public/places/marjing.jpg";
 import mi3 from "@/public/places/mayangimphal.jpeg";
 import hiyangthang3 from "@/public/places/hiyang.jpg"
-
+import loktak1 from "@/public/places/loktak.jpg"
+import loktak2 from "@/public/places/loktak2.jpg"
+import loktak3 from "@/public/places/loktak1.jpg"
 
 const images={
     kangla:[kangla1,kangla2,kangla3],
     khongjom:[khongjom1,khongjom2,khongjom3],
     marjing:[marjing1,marjing2,marjing3],
     mi:[mi1,mi2,mi3],
-    hiyangthang:[hiyangthang1,hiyangthang2,hiyangthang3]
+    hiyangthang:[hiyangthang1,hiyangthang2,hiyangthang3],
+    loktak:[loktak1,loktak2,loktak3]
 }
 
 export const ExploreCard=({card})=> {
