@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { place } from "@/components/place";
 import { Button } from "@/components/ui/button";
 import { ExploreCard } from "@/components/ui/explorecard";
@@ -7,6 +7,7 @@ import { ExploreCard } from "@/components/ui/explorecard";
 import TicketForm from "@/components/ticketform";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Page = ({ params }) => {
   const { data, status } = useSession()
@@ -17,11 +18,11 @@ const Page = ({ params }) => {
   }, [params.id]);
   const [ticket, setTicket] = useState(false)
   return (
-    <div className="flex flex-col bg-black/90 pt-16 pb-5 h-screen">
+    <div className="flex flex-col bg-black pt-16 pb-5 md:h-screen">
       <div className="flex flex-col items-center lg:flex-row lg:items-start lg:justify-center lg:ml-8 lg:gap-20">
-        <ExploreCard card={placeobject?.id} />
+        <Suspense fallback={<Skeleton className="h-[125px] w-[250px] rounded-xl " />}><ExploreCard card={placeobject?.id} /></Suspense>
         <div className="flex flex-col w-full lg:w-1/2 text-white/80 gap-4 mt-6 lg:mt-0 items-center lg:items-start ">
-          <div className="text-4xl">{placeobject?.title}</div>
+          <div className="text-4xl text-center">{placeobject?.title}</div>
           <div className="w-3/5 md:text-base text-sm">{placeobject?.address}</div>
           <div className="w-3/4">
             {status === "authenticated" ? (<Button className="w-full" onClick={() => { setTicket(true) }}>Book Ticket</Button>) : (<Button asChild><Link href={'/login'}>Login</Link></Button>)}

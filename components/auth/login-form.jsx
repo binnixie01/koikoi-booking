@@ -15,43 +15,55 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { FormError } from "@/components/ui/login-error"
-import { FormSuccess } from "@/components/ui/login-success"
-// import { login } from "@/actions/login"
 import { useState, useTransition } from 'react';
 import { signIn } from "next-auth/react"
+import { toast } from "sonner"
+import { ButtonLoading } from "../ui/buttonloading"
+import { CheckCircledIcon, ExclamationTriangleIcon } from "@radix-ui/react-icons"
 
 export const LoginForm = () => {
   const [error,setError]=useState("")
   const router = useRouter()
   const form = useForm({
     resolver: zodResolver(LoginSchema),
-    defaultValues: {
-      email: "123@abc.com",
-      password:"password"
-    },
   })
+  const [isPending, startTransition] = useTransition();
   const onSubmit= async(values)=>{
    
-    // const router = useRouter();
+    
     const {email,password}=values;
-  
+    startTransition(async () => {
     try {
       const res = await signIn("credentials",{
         email,password,redirect:false
       })
       if(res?.error){
-        // setError("Invalid credentils")
+        toast(
+          <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive ">
+           <ExclamationTriangleIcon className="h-4 w-4"/>
+           <p>{res.error}</p>
+          </div> 
+       )
         return;
       }
-      router.replace('/')
-    } catch (error) {
-      console.log(error);
+      if(res.ok){
+  
+        toast((
+          <div className="bg-emerald-500/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-emerald-500 ">
+           <CheckCircledIcon className="h-4 w-4"/>
+           <p>Log In Success</p>
+          </div> 
+       ))
+        router.replace('/')
+      }
       
-    }
+      
+    } catch (error) {
+      setError(error)
+      
+    }})
    
   }
-  const [isPending, startTransition] = useTransition();
 
   return (
     <CardWrapper
@@ -68,7 +80,7 @@ export const LoginForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="123@gmail.com" type="email" {...field} disabled={isPending} />
+                <Input placeholder="Enter Email..Hurry" type="email" {...field} disabled={isPending} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -81,15 +93,14 @@ export const LoginForm = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="enter password" {...field} type="password" disabled={isPending}/>
+                <Input placeholder="Enter password" {...field} type="password" disabled={isPending}/>
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormError/>
-        <FormSuccess />
-        <Button className="w-full" type="submit" disabled={isPending}>Log In</Button>
+        {isPending?(<ButtonLoading/>):(<Button className="w-full" type="submit" disabled={isPending}>Log In</Button>)}
+        
       </form>
     </Form>
     </CardWrapper>

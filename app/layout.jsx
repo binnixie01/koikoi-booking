@@ -1,13 +1,14 @@
-
+import { Analytics } from "@vercel/analytics/react"
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import {NextAuthProvider} from "@/app/Providers"
-
+import { Toaster } from "@/components/ui/sonner"
 const poppins = Poppins({ subsets: ["latin"],weight:['400','500','600','700'],variable:'--font-poppins' });
 
 export const metadata = {
   title: "KoiKoi",
   description: "Online Ticketing for Manipur",
+  
 };
 
 export default function RootLayout({
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body className={poppins.variable}>
         <NextAuthProvider>
         {children}
+        <Toaster/>
         </NextAuthProvider>
         </body>
     </html>

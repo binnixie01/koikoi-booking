@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
 import { Button } from "@/components/ui/button";
 
@@ -18,30 +17,35 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { toast } from "sonner";
 
 const Header = () => {
   const { status, data } = useSession();
 
   return (
     <header className="flex w-full h-12 bg-neutral-800/30 pt-4 pr-4 pl-2 pb-4 fixed z-50 backdrop-blur-lg items-center">
-      <div className="md:hidden"><DropdownMenu >
-        <DropdownMenuTrigger asChild><Button variant="outline">Menu</Button></DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuLabel>Menu</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem className="" asChild>Home</DropdownMenuItem>
-          <DropdownMenuItem asChild><Link href={"/explore"}>Explore</Link></DropdownMenuItem>
-          <DropdownMenuItem asChild><Link href={"/about"}>About</Link></DropdownMenuItem>
-          {status === "authenticated" ? (<DropdownMenuItem className="" asChild><Link href={"/orders"}>Orders</Link></DropdownMenuItem>) : null}
-          {status === "authenticated" ? (<DropdownMenuItem className="" onClick={() => {
-            signOut();
-          }}>Sign-Out</DropdownMenuItem>) : <DropdownMenuItem asChild className=""><Link href={"/register"}>Sign-In</Link></DropdownMenuItem>}
+      <div className="md:hidden flex items-center font-bold tracking-wider">
+        <DropdownMenu >
+          <DropdownMenuTrigger asChild><Button variant="outline">Menu</Button></DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>Menu</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild><Link href={"/"}>Home</Link></DropdownMenuItem>
+            <DropdownMenuItem asChild><Link href={"/explore"}>Explore</Link></DropdownMenuItem>
+            <DropdownMenuItem asChild><Link href={"/about"}>About</Link></DropdownMenuItem>
+            {status === "authenticated" ? (<DropdownMenuItem className="" asChild><Link href={"/orders"}>Orders</Link></DropdownMenuItem>) : null}
+            {status === "authenticated" ? (<DropdownMenuItem className="" onClick={() => {
+              signOut({ callbackUrl: '/' });
+              toast("Signed Out")
+            }}>Sign-Out</DropdownMenuItem>) : <DropdownMenuItem asChild className=""><Link href={"/register"}>Sign-In</Link></DropdownMenuItem>}
 
 
 
-        </DropdownMenuContent>
-      </DropdownMenu></div>
-      {status==="authenticated"&&<div className="absolute md:hidden block right-4"><Avatar>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      <div className="absolute right-[43%]  text-white/90 ">KoiKoi</div>
+      </div>
+      {status === "authenticated" && <div className="absolute md:hidden block right-4"><Avatar>
         <AvatarImage src="" />
         <AvatarFallback>{data?.user?.email.charAt(0)}</AvatarFallback>
       </Avatar>
@@ -70,7 +74,8 @@ const Header = () => {
               <div>{data?.user?.email}</div>
               <Button
                 onClick={() => {
-                  signOut();
+                  signOut({ callbackUrl: '/' });
+                  toast("Signed Out")
                 }}
               >
                 Sign out

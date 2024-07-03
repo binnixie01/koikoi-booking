@@ -14,26 +14,26 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { FormError } from "@/components/ui/login-error"
-import { FormSuccess } from "@/components/ui/login-success"
+
 import { useState, useTransition } from 'react';
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import { ButtonLoading } from "../ui/buttonloading"
+import { toast } from "sonner"
 
 export const RegisterForm = () => {
   const router = useRouter()
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState("");
   const form = useForm({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
-      name:"Ngouba",
-      email: "123@abc.com",
-      password:"password"
+      name:"Binson",
     },
   })
-  const [error, setError] = useState("");
  
   const onSubmit=async (values)=>{
-    
+    startTransition(async () => {
     try {
       const res = await fetch("/api/register", {
         method: "POST",
@@ -43,20 +43,22 @@ export const RegisterForm = () => {
         body: JSON.stringify({...values,provider:"credential"}
       )
     })
+    
       if (res.status === 400) {
-        setError("This email is already registered");
+        toast("Email or Username is already taken")
       }
       if (res.status === 200) {
         setError("");
+        toast("You are registered")
+
         router.replace("/login");
       }
-    } catch (error) {
-      setError("Error, try again");
-      console.log(error);
-    }
+    } catch (err) {
+      setError(err)
+      
+    }})
   };
   
-  const [isPending, startTransition] = useTransition();
 
 
 
@@ -75,7 +77,7 @@ export const RegisterForm = () => {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input {...field} disabled={isPending} />
+                <Input {...field} disabled={isPending} placeholder="Enter Username" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -88,7 +90,7 @@ export const RegisterForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="123@gmail.com" type="email" {...field} disabled={isPending} />
+                <Input placeholder="Enter Email" type="email" {...field} disabled={isPending} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -99,17 +101,16 @@ export const RegisterForm = () => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>password</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input placeholder="enter password" {...field} type="password" disabled={isPending}/>
+                <Input placeholder="Enter password" {...field} type="password" disabled={isPending}/>
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormError/>
-        <FormSuccess />
-        <Button className="w-full" type="submit" disabled={isPending}>Create an account</Button>
+        {isPending?(<ButtonLoading/>):(<Button className="w-full" type="submit" disabled={isPending}>Create an account</Button>)}
+        
       </form>
     </Form>
     </CardWrapper>
