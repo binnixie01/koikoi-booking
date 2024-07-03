@@ -19,6 +19,7 @@ export default function RootLayout({
       <body className={poppins.variable}>
         <NextAuthProvider>
         {children}
+        <Analytics/>
         <Toaster/>
         </NextAuthProvider>
         </body>
