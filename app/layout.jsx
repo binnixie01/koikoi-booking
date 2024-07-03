@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import {NextAuthProvider} from "@/app/Providers"
@@ -20,6 +21,7 @@ export default function RootLayout({
         <NextAuthProvider>
         {children}
         <Analytics/>
+        <SpeedInsights/>
         <Toaster/>
         </NextAuthProvider>
         </body>
