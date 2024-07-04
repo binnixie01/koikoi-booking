@@ -1,5 +1,5 @@
 const baseUrl = "https://koikoi.vercel.app"
- import place from '@/components/place'
+ import {place} from '@/components/place'
 
 export default function sitemap() {
     const places= place.map((p) => ({
