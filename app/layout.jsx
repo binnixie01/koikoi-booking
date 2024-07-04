@@ -7,14 +7,14 @@ import { Toaster } from "@/components/ui/sonner"
 const poppins = Poppins({ subsets: ["latin"],weight:['400','500','600','700'],variable:'--font-poppins' });
 
 export const metadata = {
+  
   title: {default:"KoiKoi-Booking App",
   template:`%s | Koikoi`},
-  openGraph:{
-    description: "Leading Online Ticketing for Manipur's Famous Places",
-  },
+  googleSiteVerification:"aj5qNCtT8ncF31VlPFzzMtJ7fpd8lPDsv9yOqAU8tyE",
+  
   description:"Leading Online Ticketing for Manipur's Famous Places",
   
-  keywords:["Koikoi","Booking Manipur","Manipur Booking","Manipur ticket booking","Manipur Tourism ","Koikoi Booking","Koikoi Booking App","Koikoi Kangla","Koikoi Manipur",]
+  keywords:["Koikoi","koikoi", "koikoi manipur","Koikoi Booking","Koikoi Booking App","Koikoi Kangla","Koikoi Manipur","Booking Manipur","Manipur Booking","Manipur ticket booking","Manipur Tourism ",]
   
 };
 

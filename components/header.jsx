@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { Poppins } from "next/font/google";
 import { Button } from "@/components/ui/button";
 
 import Image from "next/image";
@@ -18,13 +17,15 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { toast } from "sonner";
-
+import { Poppins } from "next/font/google";
+import { cn } from "@/lib/utils";
+const font = Poppins({subsets:["latin"],weight:["600"]})
 const Header = () => {
   const { status, data } = useSession();
 
   return (
     <header className="flex w-full h-12 bg-neutral-800/30 pt-4 pr-4 pl-2 pb-4 fixed z-50 backdrop-blur-lg items-center">
-      <div className="md:hidden flex items-center font-bold tracking-wider">
+      <nav className="md:hidden flex items-center font-bold tracking-wider">
         <DropdownMenu >
           <DropdownMenuTrigger asChild><Button variant="outline">Menu</Button></DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -43,15 +44,15 @@ const Header = () => {
 
           </DropdownMenuContent>
         </DropdownMenu>
-      <div className="absolute right-[43%]  text-white/90 ">KoiKoi</div>
-      </div>
+        <div className={cn("absolute right-[43%]  text-white/90  font-semibold",font.className)}>KoiKoi</div>
+      </nav>
       {status === "authenticated" && <div className="absolute md:hidden block right-4"><Avatar>
         <AvatarImage src="" />
         <AvatarFallback>{data?.user?.email.charAt(0)}</AvatarFallback>
       </Avatar>
       </div>}
 
-      <div className="md:flex wrapper w-full items-center justify-between  hidden text-white/80">
+      <nav className="md:flex wrapper w-full items-center justify-between  hidden text-white/80">
         <div className="flex justify-between items-center gap-8">
           <Link href="/" className="w-32 h-10 bg-white rounded-3xl flex">
             <div className="flex items-center gap-1">
@@ -87,7 +88,7 @@ const Header = () => {
             </Button>
           )}
         </div>
-      </div>
+      </nav>
     </header>
   );
 };
