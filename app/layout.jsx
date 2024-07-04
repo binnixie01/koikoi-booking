@@ -10,8 +10,7 @@ export const metadata = {
   
   title: {default:"KoiKoi-Booking App",
   template:`%s | Koikoi`},
-  googleSiteVerification:"aj5qNCtT8ncF31VlPFzzMtJ7fpd8lPDsv9yOqAU8tyE",
-  
+  icons:{icon:'@/app/icon.png'},
   description:"Leading Online Ticketing for Manipur's Famous Places",
   
   keywords:["Koikoi","koikoi", "koikoi manipur","Koikoi Booking","Koikoi Booking App","Koikoi Kangla","Koikoi Manipur","Booking Manipur","Manipur Booking","Manipur ticket booking","Manipur Tourism ",]
