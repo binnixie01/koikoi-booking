@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 
+
 const Page = ({ params }) => {
   const { data, status } = useSession()
   const [placeobject, setPlaceobject] = useState();

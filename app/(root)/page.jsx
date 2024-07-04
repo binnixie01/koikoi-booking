@@ -7,7 +7,7 @@ import Link from "next/link";
 const Page = () => {
   const words = ["MANIPUR", "KANLEIPAK", "SANNA-LEIPAK"];
   return (
-    <div className="flex flex-col md:flex-row bg-black items-center pb-6">
+    <div className="flex flex-col md:flex-row bg-black items-center pb-8">
       <div className="items-center md:flex justify-center lg:w-2/5 w-2/3 md:mt-0 mt-16 ">
         <Image
           src={hero}

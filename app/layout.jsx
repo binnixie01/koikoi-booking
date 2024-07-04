@@ -7,8 +7,14 @@ import { Toaster } from "@/components/ui/sonner"
 const poppins = Poppins({ subsets: ["latin"],weight:['400','500','600','700'],variable:'--font-poppins' });
 
 export const metadata = {
-  title: "KoiKoi",
-  description: "Online Ticketing for Manipur",
+  title: {default:"KoiKoi-Booking App",
+  template:`%s | Koikoi`},
+  openGraph:{
+    description: "Leading Online Ticketing for Manipur's Famous Places",
+  },
+  description:"Leading Online Ticketing for Manipur's Famous Places",
+  
+  keywords:["Koikoi","Booking Manipur","Manipur Booking","Manipur ticket booking","Manipur Tourism ","Koikoi Booking","Koikoi Booking App","Koikoi Kangla","Koikoi Manipur",]
   
 };
 
