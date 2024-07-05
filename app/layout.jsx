@@ -13,7 +13,7 @@ export const metadata = {
   icons:{icon:'@/app/icon.png'},
   description:"Leading Online Ticketing for Manipur's Famous Places",
   
-  keywords:["Koikoi","koikoi", "koikoi manipur","Koikoi Booking","Koikoi Booking App","Koikoi Kangla","Koikoi Manipur","Booking Manipur","Manipur Booking","Manipur ticket booking","Manipur Tourism ",]
+  keywords:["Koikoi","koikoi", "koikoi manipur","manipur koikoi","manipur","Koikoi Booking","Koikoi Booking App","Koikoi Kangla","Koikoi Manipur","Booking Manipur","Manipur Booking","Manipur ticket booking","Manipur Tourism ",]
   
 };
 
