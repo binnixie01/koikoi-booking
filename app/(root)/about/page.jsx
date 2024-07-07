@@ -9,6 +9,7 @@ import developer from "@/public/developer.jpg"
 import Next from "@/components/svg/next";
 import { IconBrandTailwind } from "@tabler/icons-react";
 import Mongo from "@/components/svg/mongo";
+import Link from "next/link";
 const Page = () => {
   return (
     <div className="bg-black text-white/80 h-full md:pb-28 pb-20">
