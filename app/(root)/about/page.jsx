@@ -34,9 +34,9 @@ const Page = () => {
                 <div className="flex flex-col  items-center ">
                   <div className="md:text-4xl text-2xl">Technologies Used</div>
                   <div className="flex gap-12 items-center">
-                    <Link src={'https://nextjs.org'}><Next className='w-10 h-10 md:w-20 md:h-20' /></Link> 
-                    <Link src={'https://mongodb.com'}><Mongo className="md:w-20 md:h-20 h-10 w-10"/></Link> 
-                    <Link src={'https://tailwindcss.com'}><IconBrandTailwind className="md:w-20 md:h-20 h-10 w-10"/></Link>
+                    <Link href={'https://nextjs.org'}><Next className='w-10 h-10 md:w-20 md:h-20' /></Link> 
+                    <Link href={'https://mongodb.com'}><Mongo className="md:w-20 md:h-20 h-10 w-10"/></Link> 
+                    <Link href={'https://tailwindcss.com'}><IconBrandTailwind className="md:w-20 md:h-20 h-10 w-10"/></Link>
                   </div>
                 </div></div>
 

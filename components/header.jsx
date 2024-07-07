@@ -19,9 +19,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { toast } from "sonner";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 const font = Poppins({subsets:["latin"],weight:["600"]})
 const Header = () => {
   const { status, data } = useSession();
+  const pathname = usePathname()
 
   return (
     <header className="flex w-full h-12 bg-neutral-800/30 pt-4 pr-4 pl-2 pb-4 fixed z-50 backdrop-blur-lg items-center">
@@ -54,7 +56,7 @@ const Header = () => {
 
       <nav className="md:flex wrapper w-full items-center justify-between  hidden text-white/80">
         <div className="flex justify-between items-center gap-8">
-          <Link href="/" className="w-32 h-10 bg-white rounded-3xl flex">
+          <Link href="/" className="w-32 h-10 bg-white rounded-3xl flex ">
             <div className="flex items-center gap-1">
               <Image
                 src={logo}
@@ -65,9 +67,9 @@ const Header = () => {
               <div className="relative text-black">KoiKoi</div>
             </div>
           </Link>
-          <Link className=" hover:text-white" href={"/explore"}>Explore</Link>
-          <Link className=" hover:text-white" href={"/about"}>About</Link>
-          {status === "authenticated" ? (<Link className=" hover:text-white" href={"/orders"}>Orders</Link>) : <></>}
+          <Link className={` ${pathname === '/explore' ? 'text-black/90 bg-white/80 rounded-lg px-1' : ''} hover:text-white`}  href={"/explore"}>Explore</Link>
+          <Link className={` hover:text-white ${pathname === '/about' ? 'text-black/90 bg-white/80 rounded-lg px-1' : ''}`} href={"/about"}>About</Link>
+          {status === "authenticated" ? (<Link className={`${pathname === '/orders' ? 'text-black/90 bg-white/80 rounded-lg px-1' : ''}hover:text-white`} href={"/orders"}>Orders</Link>) : <></>}
         </div>
         <div className="flex w-72 justify-end gap-4 shadow-xl items-center">
           {status === "authenticated" ? (
