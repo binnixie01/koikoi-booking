@@ -11,7 +11,7 @@ export default function RootLayout({
     children,
   }) {
     return (
-        <div className={cn("flex h-screen flex-col",font.className)}>
+        <div className={cn("flex h-screen flex-col overflow-hidden p-0 m-0",font.className)}>
 
             <Header/>
             <main>{children}</main>

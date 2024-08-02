@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import { Input } from "./ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
+
+
 const TicketForm = ({ onClick, place }) => {
   const [amount, setAmount] = useState();
+  const [number,setNumber] = useState();
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const { status, data } = useSession();
-  const handleChange = (e) => {
+  const handleChangeAmount = (e) => {
     setAmount(e.target.value);
+  };
+  const handleChangeNumber = (e) => {
+    setNumber(e.target.value);
   };
 
   const handleBooking = async (e) => {
     e.preventDefault()
-
+    startTransition(async () => {
     try {
       if (data) {
         const name = data.user.email
@@ -24,13 +31,14 @@ const TicketForm = ({ onClick, place }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name, place, amount }),
+          body: JSON.stringify({ name, place, amount,number }),
         });
+
 
       }
     } catch (error) {
       console.log(error);
-    }
+    }})
 
 
     router.replace("/orders");
@@ -54,9 +62,17 @@ const TicketForm = ({ onClick, place }) => {
           <Input
             type="number"
             id="number"
-            onChange={handleChange}
+            onChange={handleChangeAmount}
             placeholder="Enter no of tickets"
             defaultValue={0}
+          />
+            <Label htmlFor="phonenumber">Phone Number</Label>
+          <Input
+            type="number"
+            id="phonenumber"
+            onChange={handleChangeNumber}
+            placeholder="Mobile Number"
+            required
           />
         </div>
         <div>Total : {50 * amount}</div>
@@ -64,7 +80,7 @@ const TicketForm = ({ onClick, place }) => {
           onClick={handleBooking}
           className="w-full"
           type="submit"
-          disabled={isDisabled}
+          disabled={isDisabled||isPending}
         >
           Confirm
         </Button>

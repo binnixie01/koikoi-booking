@@ -38,7 +38,7 @@ const Page = () => {
             Seamless ticketing for an extraordinary <br />
             experience in Manipur`s iconic sites
           </p>
-          <Button>
+          <Button variant = 'secondary'>
             <Link href="/explore">Explore</Link>
           </Button>
         </div>

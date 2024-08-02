@@ -4,9 +4,12 @@ import { NextResponse } from "next/server";
 import { useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
-
+import twilio from 'twilio';
+const accountSid = process.env.TWILIO_ACCOUNTSID
+const authToken = process.env.TWILIOAUTHTOKEN
+const client = twilio(accountSid, authToken);
 export const POST = async (request) => {
-  const { name, place, amount } = await request.json();
+  const { name, place, amount,number } = await request.json();
 
   await dbConnect();
 
@@ -15,6 +18,14 @@ export const POST = async (request) => {
       email: name, place, qty: amount
 
     });
+    client.messages
+          .create({
+            body: `Hey ${name} your ticket is booked for ${place}`,
+            from: '+17862458469',
+
+            to: '+916009786052'
+          })
+          .then(message => console.log(message.sid));
 
     return new NextResponse("Ticket added", { status: 200 });
   } catch (err) {
@@ -31,8 +42,7 @@ export const GET = async (request) => {
   
   await dbConnect()
   try {
-    // if(data){
-      // emailData = data.user.email
+  
     const tickets = await TicketModel.find({email:session.user.email})
     return NextResponse.json(tickets)
   } catch (error) {

@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
-
 import Image from "next/image";
 import logo from "@/public/logo1.svg";
 import { useSession } from "next-auth/react";
@@ -20,7 +19,7 @@ import { toast } from "sonner";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-const font = Poppins({subsets:["latin"],weight:["600"]})
+const font = Poppins({ subsets: ["latin"], weight: ["600"] })
 const Header = () => {
   const { status, data } = useSession();
   const pathname = usePathname()
@@ -46,7 +45,7 @@ const Header = () => {
 
           </DropdownMenuContent>
         </DropdownMenu>
-        <div className={cn("absolute right-[43%]  text-white/90  font-semibold",font.className)}>KoiKoi</div>
+        <div className={cn("absolute right-[43%]  text-white/90  font-semibold", font.className)}>KoiKoi</div>
       </nav>
       {status === "authenticated" && <div className="absolute md:hidden block right-4"><Avatar>
         <AvatarImage src="" />
@@ -67,7 +66,7 @@ const Header = () => {
               <div className="relative text-black">KoiKoi</div>
             </div>
           </Link>
-          <Link className={` ${pathname === '/explore' ? 'text-black/90 bg-white/80 rounded-lg px-1' : ''} hover:text-white`}  href={"/explore"}>Explore</Link>
+          <Link className={` ${pathname === '/explore' ? 'text-black/90 bg-white/80 rounded-lg px-1' : ''} hover:text-white`} href={"/explore"}>Explore</Link>
           <Link className={` hover:text-white ${pathname === '/about' ? 'text-black/90 bg-white/80 rounded-lg px-1' : ''}`} href={"/about"}>About</Link>
           {status === "authenticated" ? (<Link className={`${pathname === '/orders' ? 'text-black/90 bg-white/80 rounded-lg px-1' : ''}hover:text-white`} href={"/orders"}>Orders</Link>) : <></>}
         </div>
@@ -75,7 +74,7 @@ const Header = () => {
           {status === "authenticated" ? (
             <>
               <div>{data?.user?.email}</div>
-              <Button
+              <Button variant='secondary'
                 onClick={() => {
                   signOut({ callbackUrl: '/' });
                   toast("Signed Out")

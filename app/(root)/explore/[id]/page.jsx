@@ -23,7 +23,7 @@ const Page = ({ params }) => {
       <div className="flex flex-col items-center lg:flex-row lg:items-start lg:justify-center lg:ml-8 lg:gap-20">
         <Suspense fallback={<Skeleton className="h-[125px] w-[250px] rounded-xl " />}><ExploreCard card={placeobject?.id} /></Suspense>
         <div className="flex flex-col w-full lg:w-1/2 text-white/80 gap-4 mt-6 lg:mt-0 items-center lg:items-start ">
-          <div className="text-4xl text-center">{placeobject?.title}</div>
+          <h1 className="text-4xl text-center">{placeobject?.title}</h1>
           <div className="w-3/5 md:text-base text-sm">{placeobject?.address}</div>
           <div className="w-3/4">
             {status === "authenticated" ? (<Button className="w-full" onClick={() => { setTicket(true) }}>Book Ticket</Button>) : (<Button asChild><Link href={'/login'}>Login</Link></Button>)}

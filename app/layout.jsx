@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import {NextAuthProvider} from "@/app/Providers"
 import { Toaster } from "@/components/ui/sonner"
+import { cn } from "@/lib/utils";
 const poppins = Poppins({ subsets: ["latin"],weight:['400','500','600','700'],variable:'--font-poppins' });
 
 export const metadata = {
@@ -19,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={poppins.variable}>
+      <body className={cn("m-0 p-0 overflow-hidden",poppins.variable)}>
         <NextAuthProvider>
         {children}
         <Analytics/>
