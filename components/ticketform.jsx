@@ -5,11 +5,9 @@ import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-
-
 const TicketForm = ({ onClick, place }) => {
   const [amount, setAmount] = useState();
-  const [number,setNumber] = useState();
+  const [number, setNumber] = useState();
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const { status, data } = useSession();
@@ -23,24 +21,21 @@ const TicketForm = ({ onClick, place }) => {
   const handleBooking = async (e) => {
     e.preventDefault()
     startTransition(async () => {
-    try {
-      if (data) {
-        const name = data.user.email
-        const res = await fetch("/api/orders", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, place, amount,number }),
-        });
-
-
+      try {
+        if (data) {
+          const name = data.user.email
+          const res = await fetch("/api/orders", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, place, amount, number }),
+          });
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }})
-
-
+    })
     router.replace("/orders");
   };
   const isDisabled = amount == 0 || amount == undefined;
@@ -66,7 +61,7 @@ const TicketForm = ({ onClick, place }) => {
             placeholder="Enter no of tickets"
             defaultValue={0}
           />
-            <Label htmlFor="phonenumber">Phone Number</Label>
+          <Label htmlFor="phonenumber">Phone Number</Label>
           <Input
             type="number"
             id="phonenumber"
@@ -80,7 +75,7 @@ const TicketForm = ({ onClick, place }) => {
           onClick={handleBooking}
           className="w-full"
           type="submit"
-          disabled={isDisabled||isPending}
+          disabled={isDisabled || isPending}
         >
           Confirm
         </Button>

@@ -2,14 +2,12 @@
 import {
     Card,
     CardContent,
-  
     CardFooter,
     CardHeader,
   } from "@/components/ui/card"
 import { Header } from "@/components/auth/header";
 import { Social } from "@/components/auth/social";
 import BackButton from "@/components/auth/backbutton";
-
 
 const CardWrapper = ({children,headerLabel,backButtonHref,backButtonlabel}) => {
   return (

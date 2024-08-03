@@ -13,15 +13,13 @@ export const POST = async (request) => {
       { email }]
   });
   if (existingUser) {
-    return new NextResponse({message:"Email or Username is already in use"}, { status: 400 });
+    return new NextResponse({ message: "Email or Username is already in use" }, { status: 400 });
   }
-
 
   let hashedPassword;
   if (provider === 'credential' && password) {
     hashedPassword = await bcrypt.hash(password, 12);
   }
-
 
   try {
     await UserModel.create({ name, email, password: hashedPassword, provider });

@@ -2,21 +2,15 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 
 export const HoverEffect = ({
   items,
   className,
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState(null);
-
   return (
-    <div
-      className={cn(
-        "grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  py-10",
-        className
-      )}
-    >
+    <div className={cn("grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  py-10", className)}>
       {items.map((item, idx) => (
         <Link
           href={item?.link}
@@ -43,17 +37,17 @@ export const HoverEffect = ({
             )}
           </AnimatePresence>
           <Card>
-          <CardImage src={item.photoUrl} alt={item.title} />
+            <CardImage src={item.photoUrl} alt={item.title} />
             <CardTitle>{item.title}</CardTitle>
-              <CardPrice></CardPrice>
+            <CardPrice></CardPrice>
           </Card>
         </Link>
       ))}
     </div>
   );
 };
-export const CardPrice=()=>{
-  return(
+export const CardPrice = () => {
+  return (
     <div className="text-white/80">₹ 50/person</div>
   )
 }
@@ -82,7 +76,7 @@ export const CardImage = ({
 }) => {
   return (
     <div className={cn("rounded-2xl overflow-hidden h-48", className)}>
-       <Image src={src} alt="photo Monument"  />
+      <Image src={src} alt="photo Monument" />
     </div>
   );
 };

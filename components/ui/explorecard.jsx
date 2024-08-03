@@ -1,5 +1,4 @@
 import * as React from "react"
- 
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
@@ -43,41 +42,37 @@ import keibul2 from "@/public/places/keibul2.jpg"
 import keibul3 from "@/public/places/keibul3.jpeg"
 import keibul4 from "@/public/places/keibul4.jpeg"
 
-const images={
-    kangla:[kangla1,kangla2,kangla3],
-    khongjom:[khongjom1,khongjom2,khongjom3],
-    marjing:[marjing1,marjing2,marjing3],
-    hiyangthang:[hiyangthang1,hiyangthang2,hiyangthang3],
-    loktak:[loktak1,loktak2,loktak3],
-    shirui:[shirui2,shirui1,shirui3,shirui4],
-    dzukou:[dzukou1,dzukou2,dzukou3,dzukou4],
-    govindajee:[govind1,govind2,govind3],
-    cemetery:[cemetery1,cemetery2,cemetery3],
-    kbj:[keibul1,keibul2,keibul3,keibul4]
-
+const images = {
+  kangla: [kangla1, kangla2, kangla3],
+  khongjom: [khongjom1, khongjom2, khongjom3],
+  marjing: [marjing1, marjing2, marjing3],
+  hiyangthang: [hiyangthang1, hiyangthang2, hiyangthang3],
+  loktak: [loktak1, loktak2, loktak3],
+  shirui: [shirui2, shirui1, shirui3, shirui4],
+  dzukou: [dzukou1, dzukou2, dzukou3, dzukou4],
+  govindajee: [govind1, govind2, govind3],
+  cemetery: [cemetery1, cemetery2, cemetery3],
+  kbj: [keibul1, keibul2, keibul3, keibul4]
 }
 
-export const ExploreCard=({card})=> {
-    const image = images[card] ||[] //card is the id of the place object
-    return (
-      <Carousel className="lg:w-full w-2/3 max-w-xs">
-        <CarouselContent>
+export const ExploreCard = ({ card }) => {
+  const image = images[card] || [] //card is the id of the place object
+  return (
+    <Carousel className="lg:w-full w-2/3 max-w-xs">
+      <CarouselContent>
         {image.map((imageSrc, index) => (
-            <CarouselItem key={index} className="flex justify-center items-center">
-                
-            
-                <Card className="border-0 m-1 ">
-                  <CardContent className="flex items-center p-0 justify-center">
-                    <Image src={imageSrc} alt="picture" className="w-full h-full object-cover " width={500}
-                    height={300} />
-                  </CardContent>
-                </Card>
-        
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-    )
-  }
+          <CarouselItem key={index} className="flex justify-center items-center">
+            <Card className="border-0 m-1 ">
+              <CardContent className="flex items-center p-0 justify-center">
+                <Image src={imageSrc} alt="picture" className="w-full h-full object-cover " width={500}
+                  height={300} />
+              </CardContent>
+            </Card>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+  )
+}

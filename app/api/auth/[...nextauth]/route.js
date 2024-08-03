@@ -4,7 +4,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/userModel";
 import bcrypt from "bcryptjs"
-export const authOptions= {
+
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.AUTH_GOOGLE_ID,
@@ -17,34 +18,32 @@ export const authOptions= {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials){
-        await dbConnect()   
+      async authorize(credentials) {
+        await dbConnect()
         try {
           const user = await UserModel.findOne({
-            email:credentials.email
+            email: credentials.email
           })
-          if(!user){
+          if (!user) {
             throw new Error('No user found with this email')
           }
-          const isPasswordCorrect = await bcrypt.compare(credentials.password,user.password)
-          if(isPasswordCorrect){
+          const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password)
+          if (isPasswordCorrect) {
             return user
-          } else{
+          } else {
             throw new Error('Invalid Password')
           }
         } catch (error) {
-          
           throw new Error(error.message)
         }
-        
+
       },
     }),
   ],
-  session:{
-    strategy:'jwt',
+  session: {
+    strategy: 'jwt',
   },
-  secret:process.env.NEXTAUTH_SECRET,
-  
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user, account }) {
       if (account.provider === "google") {
@@ -66,15 +65,14 @@ export const authOptions= {
       }
       return user;
     },
-    async jwt({ token, account, user,session }) {
+    async jwt({ token, account, user, session }) {
       if (user) {
-        return {...token,name:user.username,id:user.id}
+        return { ...token, name: user.username, id: user.id }
       }
-      
       return token
     },
     async session({ session, token, user }) {
-      return session 
+      return session
     },
   },
 };

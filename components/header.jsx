@@ -40,9 +40,6 @@ const Header = () => {
               signOut({ callbackUrl: '/' });
               toast("Signed Out")
             }}>Sign-Out</DropdownMenuItem>) : <DropdownMenuItem asChild className=""><Link href={"/register"}>Sign-In</Link></DropdownMenuItem>}
-
-
-
           </DropdownMenuContent>
         </DropdownMenu>
         <div className={cn("absolute right-[43%]  text-white/90  font-semibold", font.className)}>KoiKoi</div>

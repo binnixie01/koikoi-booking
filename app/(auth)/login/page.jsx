@@ -4,14 +4,14 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-const Page = async() => {
+const Page = async () => {
   const session = await getServerSession(authOptions)
-  console.log(session);
-  
-  if(session) redirect('/')
+  if (session) redirect('/')
   return (
-    <div className="flex justify-center items-center mt-6"><LoginForm/></div>
-    
+    <div className="flex justify-center items-center mt-6">
+      <LoginForm />
+    </div>
+
   )
 }
 

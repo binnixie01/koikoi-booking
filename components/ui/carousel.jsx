@@ -2,7 +2,6 @@
 import * as React from "react"
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons"
 import useEmblaCarousel from "embla-carousel-react";
-
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
@@ -14,7 +13,6 @@ function useCarousel() {
   if (!context) {
     throw new Error("useCarousel must be used within a <Carousel />")
   }
-
   return context
 }
 
@@ -41,7 +39,6 @@ const Carousel = React.forwardRef((
     if (!api) {
       return
     }
-
     setCanScrollPrev(api.canScrollPrev())
     setCanScrollNext(api.canScrollNext())
   }, [])
@@ -76,11 +73,9 @@ const Carousel = React.forwardRef((
     if (!api) {
       return
     }
-
     onSelect(api)
     api.on("reInit", onSelect)
     api.on("select", onSelect)
-
     return () => {
       api?.off("select", onSelect)
     };
