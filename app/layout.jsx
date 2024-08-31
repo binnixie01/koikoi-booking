@@ -3,7 +3,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { NextAuthProvider } from "@/app/Providers"
 import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils";
-
+import  openGraphImage from '@/app/icon.png'
 import "./globals.css";
 import { Poppins } from "next/font/google";
 
@@ -13,6 +13,10 @@ export const metadata = {
   title: {
     default: "KoiKoi-Booking App",
     template: `%s | Koikoi`
+  },
+  openGraph: {
+    image:openGraphImage
+    ,
   },
   icons: { icon: '@/app/icon.png' },
   description: "Leading Online Ticketing for Manipur's Famous Places like Kangla fort, Loktak Lake, Khongjom War Memorial",
