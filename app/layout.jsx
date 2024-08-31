@@ -3,7 +3,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { NextAuthProvider } from "@/app/Providers"
 import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils";
-import  openGraphImage from '@/app/icon.png'
+// import  openGraphImage from '@/app/api/og'
 import "./globals.css";
 import { Poppins } from "next/font/google";
 
@@ -15,9 +15,11 @@ export const metadata = {
     template: `%s | Koikoi`
   },
   openGraph: {
-    image:openGraphImage
-    ,
+    image:'https://koikoi.vercel.app/icon.png',
+    title:"Koikoi-Booking App",
+    description:"Leading Online Ticketing for Manipur's Famous Places like Kangla fort, Loktak Lake, Khongjom War Memorial",
   },
+  image:'https://koikoi.vercel.app/icon.png',
   icons: { icon: '@/app/icon.png' },
   description: "Leading Online Ticketing for Manipur's Famous Places like Kangla fort, Loktak Lake, Khongjom War Memorial",
 };
