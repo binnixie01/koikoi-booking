@@ -12,7 +12,7 @@ const font = Poppins({ subsets: ["latin"], weight: ["600"] })
 const Page = () => {
   const words = ["MANIPUR", "KANGLEIPAK", "SANNA-LEIPAK"];
   return (
-    <div className="flex flex-col md:flex-row bg-black items-center pb-8">
+    <div className="flex flex-col md:flex-row bg-black items-center pb-8 pt-10">
       {/* google sitename */}
       <div itemscope itemtype="https://schema.org/WebSite">
         <meta itemprop="url" content="https://koikoi.vercel.app/" />

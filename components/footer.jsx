@@ -5,7 +5,7 @@ import { IconBrandWhatsapp } from '@tabler/icons-react'
 
 const Footer = () => {
   return (
-    <footer className="bg-black border-t">
+    <footer className="bg-black border-t h-full">
       <div className="mx-auto max-w-5xl px-4 pb-6 sm:px-6 lg:px-8 mb-0 flex flex-col justify-center gap-6 items-center">
         <nav className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
           <Link className="text-gray-700 transition hover:text-white" href="/about"> About </Link>

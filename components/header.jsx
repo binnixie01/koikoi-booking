@@ -52,15 +52,15 @@ const Header = () => {
 
       <nav className="md:flex wrapper w-full items-center justify-between  hidden text-white/80">
         <div className="flex justify-between items-center gap-8">
-          <Link href="/" className="w-32 h-10 bg-white rounded-3xl flex ">
-            <div className="flex items-center gap-1">
+          <Link href="/" className="w-32">
+            <div className="flex items-center gap-2  ">
               <Image
                 src={logo}
                 alt="logo image"
                 width={60}
-                className="rounded-3xl"
+                className="rounded-full"
               />
-              <div className="relative text-black">KoiKoi</div>
+              <div className="relative text-white/80">KoiKoi</div>
             </div>
           </Link>
           <Link className={` ${pathname === '/explore' ? 'text-black/90 bg-white/80 rounded-lg px-1' : ''} hover:text-white`} href={"/explore"}>Explore</Link>
